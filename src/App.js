@@ -3,34 +3,44 @@ import './normal.css';
 import {useState} from "react";
 
 function App() {
+
+    // useEffect(() => {
+    //     getModels();
+    // }, []);
+
     const [input, setInput] = useState("");
+    // const [models, setModels] = useState([]);
+    // const [currentModel, setCurrentModel] = useState("gpt-3.5-turbo");
     const [chatLog, setChatLog] = useState([
         {
             role: "assistant", content: "Hi, I'm a GPT-3.5-turbo assistant. How can I help you?"
         },
-        {
-            role: "user", content: "Hi, I need help."
-        }
     ]);
 
     function clearChat() {
         setChatLog([]);
     }
 
+    // function getModels() {
+    //     fetch("http://localhost:5000/api/models/")
+    //         .then(res => res.json())
+    //         .then(data => setModels(data.data));
+    // }
+
     async function handleSubmit(e) {
         e.preventDefault();
-        let chatLogNew = [...chatLog, { role: "user", content: `${input}` }];
+        let chatLogNew = [...chatLog, {role: "user", content: `${input}`}];
         setChatLog(chatLogNew);
         setInput("");
 
-        // fetch response to the api
-        const response = await fetch("http://34.213.238.12/api/api/gpt", {
+        // fetch response to the api from http://34.213.238.12/api/api/gpt or http://localhost:5000/api/gpt/
+        const response = await fetch("http://localhost:5000/api/gpt/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                messages: chatLogNew
+                messages: chatLogNew,
             }),
         });
 
@@ -54,12 +64,13 @@ function App() {
                     ))}
                 </div>
                 <div className="chat-input-holder">
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit} className="submit-form">
                         <input
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
                             className="chat-input-textarea">
                         </input>
+                        <button className="chat-input-button" type="submit" disabled={!input}>submit</button>
                     </form>
                 </div>
             </section>
