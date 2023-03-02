@@ -36,6 +36,7 @@ function App() {
 
         const data = await response.json();
         await setChatLog([...chatLogNew, {role: "assistant", content: `${data.data}`}]);
+        console.log(data);
     }
 
     return (
