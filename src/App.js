@@ -33,8 +33,8 @@ function App() {
         setChatLog(chatLogNew);
         setInput("");
 
-        // fetch response to the api from http://34.213.238.12/api/api/gpt or http://localhost:5000/api/gpt/
-        const response = await fetch("http://localhost:5000/api/gpt/", {
+        // fetch response to the api from http://34.213.238.12/api/api/gpt/ or http://localhost:5000/api/gpt/
+        const response = await fetch("http://34.213.238.12/api/api/gpt/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
