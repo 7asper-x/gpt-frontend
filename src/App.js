@@ -24,7 +24,7 @@ function App() {
         setInput("");
 
         // fetch response to the api
-        const response = await fetch("https://xs7asper.herokuapp.com/api/gpt", {
+        const response = await fetch("http://34.213.238.12/api/api/gpt", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
