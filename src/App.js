@@ -105,7 +105,7 @@ const ChatMessage = ({message, chatLogRef}) => {
                         remarkPlugins={[remarkGfm]}
                         components={{
                             code({node, inline, children, className, ...props}) {
-                                return <PrismHighlighter children={children}  {...props} />;
+                                return <PrismHighlighter children={children} className={className}  {...props} />;
                             }
                         }}
                     />
@@ -115,9 +115,20 @@ const ChatMessage = ({message, chatLogRef}) => {
     )
 }
 
-const PrismHighlighter = ({props, children}) => {
+const PrismHighlighter = ({props, children, className}) => {
+    let language = "python";
+    if (className) {
+        const parts = className.split('-');
+        language = parts[1];
+        if (language === "c++") language = "cpp";
+    }
+
     return (
-        <SyntaxHighlighter style={nightOwl} language="javascript" showLineNumbers {...props}>
+        <SyntaxHighlighter
+            style={nightOwl}
+            language={language}
+            showLineNumbers {...props}
+            wrapLines={true} >
             {children}
         </SyntaxHighlighter>
     );
