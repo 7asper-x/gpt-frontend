@@ -38,14 +38,14 @@
     flex: 1;
     background-color: #343541;
     position: relative;
-    /*border: 1px solid white;*/
+    overflow-y: auto;
 }
 
 .chat-input-holder {
     padding: 24px;
-    position: absolute;
+    position: fixed;
     bottom: 0;
-    left: 0;
+    left: 280px;
     right: 0;
 }
 
@@ -114,10 +114,20 @@
     font-size: 1.25em;
     cursor: pointer;
     transition: ease 0.35s;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
 }
 
 .chat-input-button:hover {
     background-color: #0da37f;
+}
+
+.code-block {
+    background-color: #000000;
+    padding: 10px;
+    border-radius: 5px;
+    font-family: monospace;
+    font-size: 14px;
+    line-height: 1.5;
 }
 
 .App-logo {

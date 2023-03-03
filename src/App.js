@@ -1,31 +1,33 @@
 import './App.css';
 import './normal.css';
-import {useState} from "react";
+import {useState, useRef, useEffect} from "react";
+import ReactMarkdown from 'react-markdown';
+import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
+import { nightOwl } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import remarkGfm from 'remark-gfm'
+
 
 function App() {
 
-    // useEffect(() => {
-    //     getModels();
-    // }, []);
-
+    const chatLogRef = useRef(null);
     const [input, setInput] = useState("");
-    // const [models, setModels] = useState([]);
-    // const [currentModel, setCurrentModel] = useState("gpt-3.5-turbo");
     const [chatLog, setChatLog] = useState([
         {
             role: "assistant", content: "Hi, I'm a GPT-3.5-turbo assistant. How can I help you?"
         },
     ]);
 
+    useEffect(() => {
+        if (chatLogRef.current) {
+            chatLogRef.current.scrollIntoView({
+                behavior: "smooth",
+            });
+        }
+    }, [chatLog]);
+
     function clearChat() {
         setChatLog([]);
     }
-
-    // function getModels() {
-    //     fetch("http://localhost:5000/api/models/")
-    //         .then(res => res.json())
-    //         .then(data => setModels(data.data));
-    // }
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -57,12 +59,14 @@ function App() {
                     New Chat
                 </div>
             </aside>
-            <section className="chat-box">
+            <div className="chat-box">
                 <div className="chat-log">
                     {chatLog.map((content, index) => (
-                        <ChatMessage message={content} key={index}/>
+                        <ChatMessage message={content} key={index} chatLogRef={chatLogRef}/>
                     ))}
+                    {/*<ReactMarkdown className="code-block" children={codeSnippet}/>*/}
                 </div>
+                <br/><br/><br/><br/><br/><br/><br/>
                 <div className="chat-input-holder">
                     <form onSubmit={handleSubmit} className="submit-form">
                         <input
@@ -73,15 +77,15 @@ function App() {
                         <button className="chat-input-button" type="submit" disabled={!input}>submit</button>
                     </form>
                 </div>
-            </section>
+            </div>
 
         </div>
     );
 }
 
-const ChatMessage = ({message}) => {
+const ChatMessage = ({message, chatLogRef}) => {
     return (
-        <div className={`chat-message ${message.role === "assistant" && "chat-gpt"}`}>
+        <div className={`chat-message ${message.role === "assistant" && "chat-gpt"}`} ref={chatLogRef}>
             <div className="chat-message-center">
                 <div className={`avatar ${message.role === "assistant" && "chat-gpt"}`}>
                     {message.role === "assistant" && <svg
@@ -95,10 +99,28 @@ const ChatMessage = ({message}) => {
                         />
                     </svg>}
                 </div>
-                <div className="message">{message.content}</div>
+                <div className="message">
+                    <ReactMarkdown
+                        children={message.content}
+                        remarkPlugins={[remarkGfm]}
+                        components={{
+                            code({node, inline, children, className, ...props}) {
+                                return <PrismHighlighter children={children}  {...props} />;
+                            }
+                        }}
+                    />
+                </div>
             </div>
         </div>
     )
+}
+
+const PrismHighlighter = ({props, children}) => {
+    return (
+        <SyntaxHighlighter style={nightOwl} language="javascript" showLineNumbers {...props}>
+            {children}
+        </SyntaxHighlighter>
+    );
 }
 
 export default App;
