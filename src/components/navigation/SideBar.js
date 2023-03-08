@@ -16,7 +16,7 @@ const SideBar = ({clearChat, toggleMode, logoMode, mode}) => {
                     </span>
 
                     <div className="text header-text">
-                        <span className="name">ChatGPT</span>
+                        <span className="name">姐姐生日快乐</span>
                         <span className="profession">xs7asper</span>
                     </div>
                 </div>

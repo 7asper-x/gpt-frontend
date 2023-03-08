@@ -339,9 +339,9 @@ header .image-text .header-text {
 
 .chat-input-holder {
     padding: 24px;
-    position: relative;
+    position: fixed;
     bottom: 0;
-    left: 0;
+    left: 280px;
     right: 0;
 }
 
