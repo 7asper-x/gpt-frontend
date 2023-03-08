@@ -30,43 +30,43 @@ const SideBar = ({clearChat, toggleMode, logoMode, mode}) => {
                         <input type="search" placeholder="Search..."></input>
                     </li>
                     <li className="nav-link">
-                        <a href="#" onClick={clearChat}>
+                        <a href="/" onClick={clearChat}>
                             <i className='bx bx-edit-alt icon'></i>
                             <span className="text nav-text">Clear Chat</span>
                         </a>
                     </li>
                     <li className="nav-link">
-                        <a href="#">
+                        <a href="/">
                             <i className='bx bx-home-alt icon'></i>
                             <span className="text nav-text">Dashboard</span>
                         </a>
                     </li>
                     <li className="nav-link">
-                        <a href="#">
+                        <a href="/">
                             <i className='bx bx-bar-chart-alt-2 icon'></i>
                             <span className="text nav-text">Revenue</span>
                         </a>
                     </li>
                     <li className="nav-link">
-                        <a href="#">
+                        <a href="/">
                             <i className='bx bx-bell icon'></i>
                             <span className="text nav-text">Notification</span>
                         </a>
                     </li>
                     <li className="nav-link">
-                        <a href="#">
+                        <a href="/">
                             <i className='bx bx-pie-chart-alt icon'></i>
                             <span className="text nav-text">Analytics</span>
                         </a>
                     </li>
                     <li className="nav-link">
-                        <a href="#">
+                        <a href="/">
                             <i className='bx bx-heart icon'></i>
                             <span className="text nav-text">Likes</span>
                         </a>
                     </li>
                     <li className="nav-link">
-                        <a href="#">
+                        <a href="/">
                             <i className='bx bx-wallet icon'></i>
                             <span className="text nav-text">Wallets</span>
                         </a>
@@ -75,7 +75,7 @@ const SideBar = ({clearChat, toggleMode, logoMode, mode}) => {
 
                 <div className="bottom-content">
                     <li className="">
-                        <a href="#">
+                        <a href="/">
                             <i className='bx bx-log-out icon'></i>
                             <span className="text nav-text">Logout</span>
                         </a>
