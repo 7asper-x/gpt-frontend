@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {Link} from "react-router-dom";
 
 const SideBar = ({clearChat, toggleMode, logoMode, mode}) => {
     const [toggle, setToggle] = useState("open");
@@ -16,7 +17,7 @@ const SideBar = ({clearChat, toggleMode, logoMode, mode}) => {
                     </span>
 
                     <div className="text header-text">
-                        <span className="name">姐姐生日快乐</span>
+                        <span className="name">ChatGPT</span>
                         <span className="profession">xs7asper</span>
                     </div>
                 </div>
@@ -75,15 +76,16 @@ const SideBar = ({clearChat, toggleMode, logoMode, mode}) => {
 
                 <div className="bottom-content">
                     <li className="">
-                        <a href="/">
+                        <Link to="/login">
                             <i className='bx bx-log-out icon'></i>
                             <span className="text nav-text">Logout</span>
-                        </a>
+                        </Link>
                     </li>
                     <li className="mode">
                         <div className="moon-sun">
                             {
-                                mode === "Light Mode" ? <i className='bx bx-moon icon moon'></i> : <i className='bx bx-sun icon sun'></i>
+                                mode === "Light Mode" ? <i className='bx bx-moon icon moon'></i> :
+                                    <i className='bx bx-sun icon sun'></i>
                             }
                         </div>
                         {

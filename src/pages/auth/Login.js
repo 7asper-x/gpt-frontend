@@ -1,9 +1,20 @@
 import React from 'react';
 import {useState} from 'react';
+import {toast} from "react-toastify";
 
 const Login = () => {
     const [showPwd, setShowPwd] = useState(false);
     const [active, setActive] = useState("login-container");
+    const [registerEmail, setRegisterEmail] = useState("");
+    const [registerPassword, setRegisterPassword] = useState("");
+
+    const registerSubmit = async (e) => {
+        e.preventDefault();
+
+        toast.success(`Email is sent to ${registerEmail}. Click the link to complete your registration.`);
+        window.localStorage.setItem("emailForRegistration", registerEmail);
+        setRegisterEmail("");
+    };
 
     function toggleShowPwd() {
         setShowPwd(!showPwd);
@@ -19,16 +30,17 @@ const Login = () => {
                 <div className="login-forms">
                     <div className="login-form login">
                         <span className="login-title">Login</span>
-
                         <form action="#">
                             <div className="login-input-field">
-                                <input type="text" placeholder="Enter your email" required/>
+                                <input type="email" placeholder="Enter your email" required/>
                                 <i className='bx bx-envelope icon'></i>
                             </div>
                             <div className="login-input-field">
-                                {showPwd ? <input type="text" placeholder="Enter your password" required/> : <input type="password" placeholder="Enter your password" required/>}
+                                {showPwd ? <input type="text" placeholder="Enter your password" required/> :
+                                    <input type="password" placeholder="Enter your password" required/>}
                                 <i className='bx bx-lock-alt icon'></i>
-                                {showPwd ? <i className='bx bx-show showHidePwd' onClick={toggleShowPwd}></i> : <i className='bx bx-hide showHidePwd' onClick={toggleShowPwd}></i>}
+                                {showPwd ? <i className='bx bx-show showHidePwd' onClick={toggleShowPwd}></i> :
+                                    <i className='bx bx-hide showHidePwd' onClick={toggleShowPwd}></i>}
                             </div>
 
                             <div className="login-checkbox-text">
@@ -54,14 +66,14 @@ const Login = () => {
 
                     <div className="login-form signup">
                         <span className="login-title">Register</span>
-
-                        <form action="#">
+                        <form onSubmit={registerSubmit}>
                             <div className="login-input-field">
                                 <input type="text" placeholder="Enter your name" required/>
                                 <i className='bx bx-user icon'></i>
                             </div>
                             <div className="login-input-field">
-                                <input type="text" placeholder="Enter your email" required/>
+                                <input type="email" placeholder="Enter your email" value={registerEmail}
+                                       onChange={(e) => setRegisterEmail(e.target.value)} required/>
                                 <i className='bx bx-envelope icon'></i>
                             </div>
                             <div className="login-input-field">
@@ -69,9 +81,11 @@ const Login = () => {
                                 <i className='bx bx-lock-alt icon'></i>
                             </div>
                             <div className="login-input-field">
-                                {showPwd ? <input type="text" placeholder="Confirm your password" required/> : <input type="password" placeholder="Enter your password" required/>}
+                                {showPwd ? <input type="text" placeholder="Confirm your password" required/> :
+                                    <input type="password" placeholder="Confirm your password" required/>}
                                 <i className='bx bx-lock-alt icon'></i>
-                                {showPwd ? <i className='bx bx-show showHidePwd' onClick={toggleShowPwd}></i> : <i className='bx bx-hide showHidePwd' onClick={toggleShowPwd}></i>}
+                                {showPwd ? <i className='bx bx-show showHidePwd' onClick={toggleShowPwd}></i> :
+                                    <i className='bx bx-hide showHidePwd' onClick={toggleShowPwd}></i>}
                             </div>
 
                             <div className="login-checkbox-text">
@@ -84,7 +98,7 @@ const Login = () => {
                             </div>
 
                             <div className="login-input-field login-button">
-                                <input type="button" value="Signup Now"/>
+                                <input type="submit" value="Signup Now"/>
                             </div>
                         </form>
 
